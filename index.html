@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feliz Cumpleaños, Mamá</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        background-image: url("https://upload.wikimedia.org/wikipedia/commons/1/16/Field_of_sunflowers.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+      }
+      .overlay {
+        background: rgba(255, 182, 193, 0.8); /* Rosa claro con transparencia */
+      }
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 1s, transform 1s;
+      }
+      .fade-in.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col items-center justify-center overlay">
+    <!-- Encabezado -->
+    <header class="text-center mb-12 fade-in" id="header">
+      <h1 class="text-5xl font-extrabold text-pink-700 drop-shadow-lg mb-6">
+        ¡Feliz Cumpleaños, Mamá!
+      </h1>
+      <p class="text-2xl font-light italic text-pink-800">
+        Un día especial para una persona increíble 💖
+      </p>
+    </header>
+
+    <!-- Dedicatoria -->
+    <section
+      class="w-full max-w-2xl text-center bg-white bg-opacity-70 p-6 rounded-lg shadow-lg mb-12 fade-in"
+      id="dedicatoria"
+    >
+      <p class="text-lg text-pink-900 leading-relaxed">
+        Mamá, gracias por ser la luz de nuestras vidas. Hoy celebramos no solo
+        tu cumpleaños, sino también todo el amor, la fuerza y la alegría que nos
+        das cada día. Eres nuestro mayor regalo, y te queremos más de lo que las
+        palabras pueden expresar. ¡Feliz cumpleaños! 🌹💖
+      </p>
+    </section>
+
+    <!-- Galería de Imágenes -->
+    <section class="w-full max-w-4xl mb-12 fade-in" id="galeria">
+      <h2 class="text-3xl text-center text-pink-800 font-semibold mb-6">
+        Galería de Recuerdos
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <img
+          src="https://via.placeholder.com/300x200"
+          alt="Imagen 1"
+          class="rounded-lg shadow-lg"
+        />
+        <img
+          src="https://via.placeholder.com/300x200"
+          alt="Imagen 2"
+          class="rounded-lg shadow-lg"
+        />
+        <img
+          src="https://via.placeholder.com/300x200"
+          alt="Imagen 3"
+          class="rounded-lg shadow-lg"
+        />
+      </div>
+    </section>
+
+    <!-- Reproductor de Audio -->
+    <section
+      class="w-full max-w-lg p-6 bg-white text-black rounded-lg shadow-lg fade-in"
+      id="audio-section"
+    >
+      <audio id="audio" class="w-full rounded-md overflow-hidden" controls>
+        <source src="tu-audio.mp3" type="audio/mpeg" />
+        Tu navegador no soporta el audio.
+      </audio>
+      <div class="mt-4 flex justify-around">
+        <button
+          id="playPause"
+          class="bg-pink-500 text-white px-5 py-2 rounded-lg shadow-md hover:bg-pink-600 transition-all"
+        >
+          ▶️ Reproducir / Pausar
+        </button>
+        <button
+          id="stopAudio"
+          class="bg-pink-700 text-white px-5 py-2 rounded-lg shadow-md hover:bg-pink-800 transition-all"
+        >
+          ⏹️ Detener
+        </button>
+      </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer class="mt-16 text-center fade-in" id="footer">
+      <p class="text-sm text-pink-900">
+        &copy; 2025 Celebración Especial. Con amor para mamá 🌻
+      </p>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
