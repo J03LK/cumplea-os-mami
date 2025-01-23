@@ -262,11 +262,139 @@
         .stagger-fade-in>*:nth-child(3) {
             animation-delay: 0.6s;
         }
+        /* Estilo de globos */
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            background: radial-gradient(circle, #ff69b4 40%, #ff1493 70%);
+            border-radius: 50%;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        .balloon::after {
+            content: "";
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            width: 2px;
+            height: 20px;
+            background: #ff1493;
+            transform: translateX(-50%);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-20vh) scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        /* Globos en diferentes colores */
+        .balloon:nth-child(2) {
+            background: radial-gradient(circle, #ffda79 40%, #ffbf00 70%);
+            animation-duration: 5s;
+        }
+
+        .balloon:nth-child(3) {
+            background: radial-gradient(circle, #ff6961 40%, #ff4500 70%);
+            animation-duration: 7s;
+        }
+
+        .balloon:nth-child(4) {
+            background: radial-gradient(circle, #77dd77 40%, #32cd32 70%);
+            animation-duration: 8s;
+        }
+
+        /* Fondo */
+        body {
+            background: linear-gradient(rgba(255, 192, 203, 0.3),
+                    rgba(255, 182, 193, 0.3)),
+                url("https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?auto=format&fit=crop&w=1920&q=80");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        /* Botón de mensaje sorpresa */
+        .btn-surprise {
+            background-color: #ff69b4;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .btn-surprise:hover {
+            transform: scale(1.1);
+            background-color: #ff1493;
+        }
+
+        .surprise-message {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.5rem;
+            color: #ff1493;
+            animation: slideIn 0.5s ease-out forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Animación de entrada */
+    .image-dynamic {
+        animation: bounceIn 0.8s ease forwards;
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .image-dynamic:hover {
+        transform: scale(1.1) rotate(2deg);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Rebote inicial */
+    @keyframes bounceIn {
+        0% {
+            transform: scale(0.8) translateY(50px);
+            opacity: 0;
+        }
+        50% {
+            transform: scale(1.05) translateY(-10px);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(1) translateY(0);
+        }
+    }
     </style>
 </head>
 
 <body class="min-h-screen flex flex-col items-center justify-center overlay">
     <div class="sparkles" id="sparkles"></div>
+    <!-- Globos flotantes -->
+    <div id="balloons-container" class="absolute top-0 left-0 w-full h-full -z-10">
+        <div class="balloon" style="left: 10%;"></div>
+        <div class="balloon" style="left: 30%;"></div>
+        <div class="balloon" style="left: 50%;"></div>
+        <div class="balloon" style="left: 70%;"></div>
+    </div>
 
     <!-- Modificación del header -->
     <header class="text-center mb-12 fade-in floating" id="header">
@@ -284,7 +412,11 @@
             <span class="text-4xl heartbeat inline-block">💖</span>
         </div>
     </header>
-
+    <!-- Botón para mensajes sorpresa -->
+    <section class="text-center">
+        <button class="btn-surprise" id="btn-surprise">¡Clic para mensaje sorpresa! 🎉</button>
+        <p id="surprise-message" class="surprise-message"></p>
+    </section>
 
     <!-- Dedicatoria -->
     <section
@@ -299,23 +431,42 @@
         </p>
     </section>
 
-    <!-- Galería de Imágenes -->
-    <section class="w-full max-w-4xl mb-12 stagger-fade-in" id="galeria">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <img src="imagenes/imagen1.jpeg" alt="Flores para Mamá"
-                class="rounded-2xl shadow-xl card-hover object-cover h-64 w-full" />
-            <img src="imagenes/imagen3.jpg" alt="Regalo especial"
-                class="rounded-2xl shadow-xl card-hover object-cover h-64 w-full" />
-            <img src="imagenes/imagen2.jpg" alt="Celebración"
-                class="rounded-2xl shadow-xl card-hover object-cover h-64 w-full" />
-            <img src="imagenes/imagen5.jpg" alt="Celebración"
-                class="rounded-2xl shadow-xl card-hover object-cover h-64 w-full" />
-            <img src="imagenes/imagen4.jpg" alt="Celebración"
-                class="rounded-2xl shadow-xl card-hover object-cover h-64 w-full" />
-            <img src="imagenes/imagen6.jpg" alt="Celebración"
-                class="rounded-2xl shadow-xl card-hover object-cover h-64 w-full" />
-        </div>
-    </section>
+   <!-- Galería de Imágenes -->
+<section class="w-full max-w-4xl mb-12 stagger-fade-in" id="galeria">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <img src="imagenes/imagen1.jpeg" alt="Flores para Mamá"
+            class="rounded-2xl shadow-xl card-hover image-dynamic object-cover h-64 w-full" />
+        <img src="imagenes/imagen3.jpg" alt="Regalo especial"
+            class="rounded-2xl shadow-xl card-hover image-dynamic object-cover h-64 w-full" />
+        <img src="imagenes/imagen2.jpg" alt="Celebración"
+            class="rounded-2xl shadow-xl card-hover image-dynamic object-cover h-64 w-full" />
+        <img src="imagenes/imagen5.jpg" alt="Celebración"
+            class="rounded-2xl shadow-xl card-hover image-dynamic object-cover h-64 w-full" />
+        <img src="imagenes/imagen4.jpg" alt="Celebración"
+            class="rounded-2xl shadow-xl card-hover image-dynamic object-cover h-64 w-full" />
+        <img src="imagenes/imagen6.jpg" alt="Celebración"
+            class="rounded-2xl shadow-xl card-hover image-dynamic object-cover h-64 w-full" />
+    </div>
+</section>
+
+    <script>
+        const messages = [
+            "¡Eres la mejor mamá del mundo! 💖",
+            "¡Gracias por ser nuestro ejemplo de amor le amo mucho mamita! 🌟",
+            "¡Disfrute en su día especial! 🎁",
+            "¡Es nuestro sol y alegría de todos los dias 🌻",
+            
+        ];
+
+        const btn = document.getElementById("btn-surprise");
+        const message = document.getElementById("surprise-message");
+
+        btn.addEventListener("click", () => {
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            message.textContent = randomMessage;
+            message.style.display = "block";
+        });
+    </script>
 
     <!-- Reproductor de Audio (oculto) -->
     <audio id="audio" loop autoplay>
