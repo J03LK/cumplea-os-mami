@@ -4,9 +4,100 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Feliz Cumpleaños, Mamá</title>
+    <title>Feliz Cumpleaños, Mamita</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        .animate-text {
+            animation: colorChange 4s infinite;
+            background: linear-gradient(90deg, #ff69b4, #ff1493, #ff69b4);
+            background-size: 200% auto;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .animate-subtitle {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes colorChange {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .animate-text:hover {
+            animation: shake 0.5s;
+            animation-iteration-count: 1;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translate(1px, 1px) rotate(0deg);
+            }
+
+            10% {
+                transform: translate(-1px, -2px) rotate(-1deg);
+            }
+
+            20% {
+                transform: translate(-3px, 0px) rotate(1deg);
+            }
+
+            30% {
+                transform: translate(3px, 2px) rotate(0deg);
+            }
+
+            40% {
+                transform: translate(1px, -1px) rotate(1deg);
+            }
+
+            50% {
+                transform: translate(-1px, 2px) rotate(-1deg);
+            }
+
+            60% {
+                transform: translate(-3px, 1px) rotate(0deg);
+            }
+
+            70% {
+                transform: translate(3px, 1px) rotate(-1deg);
+            }
+
+            80% {
+                transform: translate(-1px, -1px) rotate(1deg);
+            }
+
+            90% {
+                transform: translate(1px, 2px) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(1px, -2px) rotate(-1deg);
+            }
+        }
+
         @keyframes float {
 
             0%,
@@ -50,6 +141,18 @@
 
             100% {
                 transform: scale(1);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
             }
         }
 
@@ -101,14 +204,7 @@
         }
 
         .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .fade-in.show {
-            opacity: 1;
-            transform: translateY(0);
+            animation: slideIn 1.5s ease-out forwards;
         }
 
         .card-hover {
@@ -149,20 +245,37 @@
                 opacity: 1;
             }
         }
+
+        .stagger-fade-in>* {
+            opacity: 0;
+            animation: slideIn 1s ease-out forwards;
+        }
+
+        .stagger-fade-in>*:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .stagger-fade-in>*:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .stagger-fade-in>*:nth-child(3) {
+            animation-delay: 0.6s;
+        }
     </style>
 </head>
 
 <body class="min-h-screen flex flex-col items-center justify-center overlay">
     <div class="sparkles" id="sparkles"></div>
 
-    <!-- Encabezado -->
+    <!-- Modificación del header -->
     <header class="text-center mb-12 fade-in floating" id="header">
-        <h1 class="text-6xl font-extrabold text-pink-700 drop-shadow-lg mb-6 tracking-wider">
-            ¡Feliz Cumpleaños, Mamá!
+        <h1 class="text-6xl font-extrabold text-pink-700 drop-shadow-lg mb-6 tracking-wider animate-text">
+            ¡Feliz Cumpleaños, Mamita!
         </h1>
         <div class="flex items-center justify-center space-x-2">
             <span class="text-3xl">✨</span>
-            <p class="text-2xl font-light italic text-pink-800">
+            <p class="text-2xl font-light italic text-pink-800 animate-subtitle">
                 Un día especial para una persona increíble
             </p>
             <span class="text-3xl">✨</span>
@@ -172,55 +285,42 @@
         </div>
     </header>
 
+
     <!-- Dedicatoria -->
     <section
         class="w-full max-w-2xl text-center bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl mb-12 fade-in card-hover"
         id="dedicatoria">
         <p class="text-lg text-pink-900 leading-relaxed">
-            Mamá, gracias por ser la luz de nuestras vidas. Hoy celebramos no solo
-            tu cumpleaños, sino también todo el amor, la fuerza y la alegría que nos
-            das cada día. Eres nuestro mayor regalo, y te queremos más de lo que las
-            palabras pueden expresar. ¡Feliz cumpleaños! 🌹💖
+            Mamita hermosa, gracias por ser la luz de nuestras vidas. Hoy celebramos
+            no solo tu cumpleaños, sino también todo el amor, la fuerza y la alegría
+            que nos das cada día. Eres nuestro mayor regalo y apoyo en todo, te
+            queremos más de lo que las palabras pueden expresar. ¡Feliz cumpleaños
+            Mamita! 🌹💖
         </p>
     </section>
 
     <!-- Galería de Imágenes -->
-    <section class="w-full max-w-4xl mb-12 fade-in" id="galeria">
-        <h2 class="text-3xl text-center text-pink-800 font-semibold mb-6 floating">
-            ✨ Galería de Recuerdos ✨
-        </h2>
+    <section class="w-full max-w-4xl mb-12 stagger-fade-in" id="galeria">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <img src="https://images.unsplash.com/photo-1520880867055-1e30d1cb001c?auto=format&fit=crop&w=600"
-                alt="Flores para Mamá" class="rounded-2xl shadow-xl card-hover object-cover h-64 w-full" />
-            <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=600"
-                alt="Regalo especial" class="rounded-2xl shadow-xl card-hover object-cover h-64 w-full" />
-            <img src="https://images.unsplash.com/photo-1523294587484-bae6cc870010?auto=format&fit=crop&w=600"
-                alt="Celebración" class="rounded-2xl shadow-xl card-hover object-cover h-64 w-full" />
+            <img src="imagenes/imagen1.jpeg" alt="Flores para Mamá"
+                class="rounded-2xl shadow-xl card-hover object-cover h-64 w-full" />
+            <img src="imagenes/imagen3.jpg" alt="Regalo especial"
+                class="rounded-2xl shadow-xl card-hover object-cover h-64 w-full" />
+            <img src="imagenes/imagen2.jpg" alt="Celebración"
+                class="rounded-2xl shadow-xl card-hover object-cover h-64 w-full" />
+            <img src="imagenes/imagen5.jpg" alt="Celebración"
+                class="rounded-2xl shadow-xl card-hover object-cover h-64 w-full" />
+            <img src="imagenes/imagen4.jpg" alt="Celebración"
+                class="rounded-2xl shadow-xl card-hover object-cover h-64 w-full" />
+            <img src="imagenes/imagen6.jpg" alt="Celebración"
+                class="rounded-2xl shadow-xl card-hover object-cover h-64 w-full" />
         </div>
     </section>
 
-    <!-- Reproductor de Audio -->
-    <section
-        class="w-full max-w-lg p-8 bg-white/90 backdrop-blur-sm text-black rounded-2xl shadow-xl fade-in card-hover"
-        id="audio-section">
-        <h3 class="text-2xl text-pink-700 font-semibold mb-4 text-center">
-            🎵 Tu Canción Especial 🎵
-        </h3>
-        <audio id="audio" class="w-full rounded-md overflow-hidden" controls>
-            <source src="tu-audio.mp3" type="audio/mpeg" />
-            Tu navegador no soporta el audio.
-        </audio>
-        <div class="mt-6 flex justify-around">
-            <button id="playPause"
-                class="bg-gradient-to-r from-pink-500 to-rose-500 text-white px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                ▶️ Reproducir / Pausar
-            </button>
-            <button id="stopAudio"
-                class="bg-gradient-to-r from-rose-600 to-pink-700 text-white px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                ⏹️ Detener
-            </button>
-        </div>
-    </section>
+    <!-- Reproductor de Audio (oculto) -->
+    <audio id="audio" loop autoplay>
+        <source src="AUDIO/donde-estas-amor.m4a" type="audio/mpeg" />
+    </audio>
 
     <!-- Pie de página -->
     <footer class="mt-16 text-center fade-in" id="footer">

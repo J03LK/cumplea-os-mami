@@ -20,59 +20,25 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.style.backgroundPositionY = -(scrolled * 0.5) + 'px';
     });
 
-    // Mostrar elementos con animación mejorada
-    const fadeInElements = document.querySelectorAll(".fade-in");
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("show");
-                // Solo desconectamos el observer si el elemento no necesita volver a animarse
-                if (!entry.target.classList.contains("floating") &&
-                    !entry.target.classList.contains("sparkling")) {
-                    observer.unobserve(entry.target);
-                }
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: "0px"
-    });
-
-    fadeInElements.forEach(el => observer.observe(el));
-
-    // Control de audio mejorado
+    // Reproducir audio automáticamente
     const audio = document.getElementById("audio");
-    const playPauseButton = document.getElementById("playPause");
-    const stopButton = document.getElementById("stopAudio");
-
-    // Función para actualizar el estado visual de los botones
-    const updateButtonStates = () => {
-        playPauseButton.innerHTML = audio.paused ?
-            "▶️ Reproducir" :
-            "⏸️ Pausar";
-
-        playPauseButton.classList.toggle("from-pink-600", !audio.paused);
-        playPauseButton.classList.toggle("to-rose-600", !audio.paused);
+    
+    // Intentar reproducir el audio tan pronto como sea posible
+    const playAudio = async () => {
+        try {
+            await audio.play();
+            audio.volume = 0.5; // Volumen al 50%
+        } catch (error) {
+            console.log('Error al reproducir el audio:', error);
+        }
     };
 
-    playPauseButton.addEventListener("click", () => {
-        if (audio.paused) {
-            audio.play();
-        } else {
-            audio.pause();
-        }
-        updateButtonStates();
-    });
+    playAudio();
 
-    stopButton.addEventListener("click", () => {
-        audio.pause();
-        audio.currentTime = 0;
-        updateButtonStates();
-    });
-
-    // Actualizar estado inicial de los botones
-    updateButtonStates();
+    // Intentar reproducir el audio cuando el usuario interactúe con la página
+    document.addEventListener('click', () => {
+        playAudio();
+    }, { once: true });
 
     // Efecto de confeti al cargar la página
     const duration = 15 * 1000,
